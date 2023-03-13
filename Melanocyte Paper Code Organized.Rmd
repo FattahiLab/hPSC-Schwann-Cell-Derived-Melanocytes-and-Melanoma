@@ -4,6 +4,29 @@ output: html_document
 date: "2023-01-19"
 ---
 
+###load Required Packages
+```{r}
+library(Seurat)
+library(SeuratWrappers)
+library(SCENIC)
+library(GENIE3)
+library(AUCell)
+library(monocle3)
+library(CellChat)
+library(RColorBrewer)
+library(ComplexHeatmap)
+library(msigdbr)
+library(circlize)
+library(reshape2)
+library(ggplot2)
+library(stringr)
+library(biomaRt)
+library(fgsea)
+library(dplyr)
+library(survival)
+library(survminer)
+```
+
 ###Dataset Preprocessing and Analysis Pipelines
 ```{r D6 QC and Clustering}
 D6.counts <- Read10X(data.dir = "/Users/fattahilab/Desktop/Mel_10X_FASTQs/d6/results/filtered_gene_bc_matrices/HG38-PLUS")
@@ -2672,15 +2695,6 @@ ggsave(paste0(outputDir, "/BarPlot","Primary.Melanocytes.Healthy.T_prediction", 
 
 ###Figure 5
 ```{r TCGA data curation and GSEA}
-library(stringr)
-library(biomaRt)
-library(fgsea)
-library(dplyr)
-library(ggplot2)
-library(survival)
-library(survminer)
-
-rm(list = ls())
 setwd("/Volumes/Ryan_EHD/UCSF/Faranak_Lab/Data/Melanocyte Timecourse/data/10x_full/TCGA_Data_Sets/Melanoma/Sample FPKM files/")
 files <- list.files(path= "/Volumes/Ryan_EHD/UCSF/Faranak_Lab/Data/Melanocyte Timecourse/data/10x_full/TCGA_Data_Sets/Melanoma/Sample FPKM files/")
 gene.name.ref <- read.delim(file = "/Volumes/Ryan_EHD/UCSF/Faranak_Lab/Data/Melanocyte Timecourse/data/10x_full/TCGA_Data_Sets/Melanoma/Sample FPKM Files/0a3f430a-7e5e-4e68-92cc-f767da7e361c.FPKM.txt", header = FALSE)
